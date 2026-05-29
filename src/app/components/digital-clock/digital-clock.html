@@ -1,0 +1,29 @@
+<section class="bg-blue-950 text-white mt-4 mx-4 p-4">
+    <app-header></app-header>
+    
+        <div class="flex flex-col items-center text-start">
+            <div>
+            {{ formatTime('America/Sao_Paulo')}}
+            </div>
+            <div>
+            {{ formatDate('America/Sao_Paulo')}}
+            </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-6 mt-9 border-b-2  pb-9">
+            @for(worldClock of worldClocks; track worldClock.country) {
+
+                <div class="flex flex-col items-center text-start bg-black px-9 py-4">
+                    <span class="text-3xl mb-4">{{ worldClock.country }}</span>
+                    <div class="text-3xl text-green-400 mb-4">
+                    {{ formatTime(worldClock.zone)}}
+                    </div>
+                    <div class="text-xs text-zinc-500">
+                    {{ formatDate(worldClock.zone)}}
+                    </div>
+                </div>
+            }
+        </div>
+    
+        <app-footer></app-footer>
+</section>

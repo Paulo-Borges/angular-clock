@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { DigitalClock } from './components/digital-clock/digital-clock';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, DigitalClock],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
