@@ -1,59 +1,109 @@
-# AngularClock
+# Angular Clock
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+Relógio digital em tempo real com fuso horário local (Brasil) e relógios mundiais, construído com **Angular 21** e **Tailwind CSS**.
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=flat&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 
-To start a local development server, run:
+## Sobre o projeto
 
-```bash
-ng serve
+O **Angular Clock** é uma aplicação web que exibe a hora e a data atualizadas a cada segundo. O relógio principal usa o fuso `America/Sao_Paulo`, e cartões adicionais mostram o mesmo instante em outros países, formatados em português do Brasil (`pt-BR`).
+
+O projeto foi pensado como demonstração de conceitos modernos do Angular: componentes standalone, **signals** para estado reativo, ciclo de vida (`OnInit` / `OnDestroy`) e formatação de data/hora com a API nativa `Intl`.
+
+## Funcionalidades
+
+- Relógio principal em **horário de Brasília** (hora, minuto, segundo e data por extenso)
+- **Relógios mundiais** para Índia, Alemanha, Estados Unidos (Nova York) e Japão
+- Atualização automática a cada 1 segundo
+- Interface responsiva com **Tailwind CSS**
+- Cabeçalho com links para GitHub e LinkedIn
+- Rodapé com data, hora local e créditos
+
+## Stack tecnológica
+
+| Tecnologia      | Uso                                      |
+|-----------------|------------------------------------------|
+| Angular 21      | Framework, componentes, signals            |
+| TypeScript 5.9  | Tipagem estática                         |
+| Tailwind CSS 4  | Estilização utilitária                   |
+| RxJS            | Suporte do ecossistema Angular           |
+| Vitest          | Testes unitários                         |
+
+## Estrutura do projeto
+
+```
+src/app/
+├── app.ts                    # Componente raiz da aplicação
+├── components/
+│   ├── digital-clock/        # Relógio principal e cartões mundiais
+│   ├── header/               # Navegação e título
+│   └── footer/               # Rodapé com data/hora e créditos
+└── ...
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Pré-requisitos
 
-## Code scaffolding
+- [Node.js](https://nodejs.org/) (versão LTS recomendada)
+- [npm](https://www.npmjs.com/) (incluído com o Node.js)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Como executar
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Clone o repositório e instale as dependências:
 
 ```bash
-ng generate --help
+git clone https://github.com/Paulo-Borges/angular-clock.git
+cd angular-clock
+npm install
 ```
 
-## Building
-
-To build the project run:
+Inicie o servidor de desenvolvimento:
 
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Acesse [http://localhost:4200](http://localhost:4200) no navegador. A página recarrega automaticamente quando você altera os arquivos do projeto.
 
-## Running unit tests
+## Scripts disponíveis
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+| Comando        | Descrição                          |
+|----------------|------------------------------------|
+| `npm start`    | Servidor de desenvolvimento        |
+| `npm run build`| Build de produção em `dist/`       |
+| `npm test`     | Testes unitários (Vitest)           |
+| `npm run watch`| Build em modo watch (desenvolvimento) |
+
+## Build para produção
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+Os artefatos gerados ficam na pasta `dist/`. O build de produção aplica otimizações de performance e tamanho do bundle.
 
-For end-to-end (e2e) testing, run:
+## Testes
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Os testes rodam com [Vitest](https://vitest.dev/), integrado ao Angular CLI.
 
-## Additional Resources
+## Como funciona a atualização do relógio
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+O componente `DigitalClock` mantém um `signal` com a data/hora atual. No `ngOnInit`, um `setInterval` atualiza esse signal a cada segundo; no `ngOnDestroy`, o intervalo é limpo para evitar vazamento de memória.
+
+A formatação usa `toLocaleTimeString` e `toLocaleDateString` com `timeZone` e locale `pt-BR`, permitindo exibir a mesma instância em fusos diferentes sem bibliotecas externas.
+
+## Autor
+
+**Paulo Borges**
+
+- GitHub: [@Paulo-Borges](https://github.com/Paulo-Borges)
+- LinkedIn: [Paulo Borges de Almeida](https://www.linkedin.com/in/paulo-borges-de-almeida-b543b3242/)
+
+## Licença
+
+Este projeto é de uso livre para estudo e portfólio. Consulte o repositório para detalhes sobre licenciamento, se aplicável.
